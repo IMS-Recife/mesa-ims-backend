@@ -1,0 +1,15 @@
+{
+  "name": "ims",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ogr2ogr": "^3.1.0",
+    "transform-coordinates": "^1.0.0"
+  }
+}

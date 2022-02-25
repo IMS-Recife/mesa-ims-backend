@@ -1,0 +1,40 @@
+name: testing-pull-request
+
+on: pull_request
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.7.0
+        with:
+          mongodb-version: '5.0'
+
+      - name: Run tests
+        run: npm run test
+        env:
+          NODE_ENV: test
+          PORT: '3000'
+          SECRET_KEY: 'UKyJ#Yy3iqx:WZXe^T>[Xs)bR0hiW:'
+          JWT_EXPIRATION: '1d'
+          GOOGLE_CLIENT_ID: 'chave-para-fazer-sso-com-google'
+          MONGO_DATABASE_URL: mongodb://127.0.0.1
+          MONGO_DATABASE_TEST_URL: mongodb://127.0.0.1
+          PASSWORD_RESET_URL: ims-porto-digital.com.br/esqueci-a-senha
+          SMTP_HOST: smtp.host.io
+          SMTP_PORT: '587'
+          SMTP_USER: user
+          SMTP_PASS: password
+          SMTP_FROM: naoresponda@email.com
