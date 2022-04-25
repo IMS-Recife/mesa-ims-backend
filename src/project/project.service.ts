@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { Project } from './entities/project.schema'
 
 import { ProjectRepository } from './project.repository'
 
@@ -25,6 +26,22 @@ export class ProjectService {
   }
 
   async findOneById(projectId: string) {
-    return this.projectRepository.findOneById(projectId)
+    try {
+      return this.projectRepository.findOneById(projectId)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async create(project: Project) {
+    return this.projectRepository.create(project)
+  }
+
+  async update(project: Project) {
+    return this.projectRepository.update(project)
+  }
+
+  async delete(projectId: string) {
+    return this.projectRepository.delete(projectId)
   }
 }

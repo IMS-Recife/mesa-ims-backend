@@ -1,4 +1,5 @@
-import { Controller, Get, Param, Query } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common'
+import { Project } from './entities/project.schema'
 
 import { ProjectService } from './project.service'
 
@@ -18,7 +19,25 @@ export class ProjectController {
   }
 
   @Get(':projectId/areas')
-  async getProjectAreas(@Param('projectId') projectId: string, @Query('areaName') areaName: string) {
+  async getProjectAreas(
+    @Param('projectId') projectId: string,
+    @Query('areaName') areaName: string
+  ) {
     return this.projectService.getProjectAreas(projectId, areaName)
+  }
+
+  @Post()
+  async create(@Body() project: Project) {
+    return this.projectService.create(project)
+  }
+
+  @Put(':projectId')
+  async update(@Param('projectId') projectId: string, @Body() project: Project) {
+    return this.projectService.update({ ...project, projectId })
+  }
+
+  @Delete(':projectId')
+  async delete(@Param('projectId') projectId: string) {
+    return this.projectService.delete(projectId)
   }
 }

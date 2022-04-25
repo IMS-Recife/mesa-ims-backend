@@ -58,4 +58,16 @@ export class ProjectRepository {
   async findOneById(projectId: string, fields = ['-areas']): Promise<ProjectDocument | null> {
     return this.projectModel.findById(projectId).select(fields)
   }
+
+  async create(project: Project): Promise<ProjectDocument> {
+    return (await this.projectModel.create(project)).save()
+  }
+
+  async delete(projectId: string): Promise<ProjectDocument | null> {
+    return this.projectModel.findByIdAndDelete(projectId)
+  }
+
+  async update(project: Project): Promise<ProjectDocument | null> {
+    return this.projectModel.findByIdAndUpdate(project.projectId, project, { new: true })
+  }
 }
