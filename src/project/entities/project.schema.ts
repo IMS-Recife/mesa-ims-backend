@@ -8,29 +8,32 @@ export type ProjectDocument = Project & Document
 
 @Schema()
 export class Project {
-  @Prop({ required: true })
-  projectId: string
+  @Prop()
+  projectId?: string
 
-  @Prop({ required: true })
+  @Prop()
   name: string
 
   @Prop(raw({}))
-  info: Record<string, any>
+  info?: Record<string, any>
 
   @Prop({ type: [AreaSchema] })
-  areas: Area[]
-
-  @Prop({ required: true })
-  responsible: string
-
-  @Prop({ required: true })
-  place: string
+  areas?: Area[]
 
   @Prop()
-  partners: string[]
+  responsibleOrg?: string
 
   @Prop()
-  thematicGroups: string[]
+  location?: string
+
+  @Prop()
+  partners?: string[]
+
+  @Prop()
+  thematicGroups?: string[]
+
+  @Prop()
+  lastUpdate?: Date = new Date()
 }
 
 export const ProjectSchema = SchemaFactory.createForClass(Project)

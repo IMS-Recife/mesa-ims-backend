@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { ProjectPatchDTO } from './dto/project-patch.dto'
 import { Project } from './entities/project.schema'
 
 import { ProjectRepository } from './project.repository'
@@ -34,11 +35,19 @@ export class ProjectService {
   }
 
   async create(project: Project) {
-    return this.projectRepository.create(project)
+    const newProject = {
+      ...project,
+      lastUpdate: new Date()
+    }
+
+    if (!newProject.location) {
+      newProject.location = 'Recife - PE'
+    }
+    return this.projectRepository.create(newProject)
   }
 
-  async update(project: Project) {
-    return this.projectRepository.update(project)
+  async update(projectId: string, project: ProjectPatchDTO) {
+    return this.projectRepository.update(projectId, project)
   }
 
   async delete(projectId: string) {

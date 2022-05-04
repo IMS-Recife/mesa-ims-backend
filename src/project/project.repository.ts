@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 
 import { Model } from 'mongoose'
+import { ProjectPatchDTO } from './dto/project-patch.dto'
 import { Area } from './entities/area.schema'
 
 import { Project, ProjectDocument } from './entities/project.schema'
@@ -60,14 +61,15 @@ export class ProjectRepository {
   }
 
   async create(project: Project): Promise<ProjectDocument> {
-    return (await this.projectModel.create(project)).save()
+    const newProject = new this.projectModel(project)
+    return newProject.save()
   }
 
   async delete(projectId: string): Promise<ProjectDocument | null> {
     return this.projectModel.findByIdAndDelete(projectId)
   }
 
-  async update(project: Project): Promise<ProjectDocument | null> {
-    return this.projectModel.findByIdAndUpdate(project.projectId, project, { new: true })
+  async update(projectId: string, project: ProjectPatchDTO): Promise<ProjectDocument | null> {
+    return this.projectModel.findByIdAndUpdate(projectId, project, { new: true })
   }
 }

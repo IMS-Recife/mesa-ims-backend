@@ -12,11 +12,13 @@ async function bootstrap() {
   const configService = app.get(ConfigService)
   const port = configService.get<number>('PORT')
 
-  app.useGlobalPipes(new ValidationPipe({
-    whitelist: true,
-    transform: true,
-    errorHttpStatusCode: 422
-  }))
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+      errorHttpStatusCode: 422
+    })
+  )
 
   app.use(helmet())
   app.enableCors()
