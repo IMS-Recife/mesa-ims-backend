@@ -3,6 +3,7 @@ import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document } from 'mongoose'
 
 import { Area, AreaSchema } from './area.schema'
+import { Partner, PartnerSchema } from './partner.schema'
 
 export type ProjectDocument = Project & Document
 
@@ -11,7 +12,7 @@ export class Project {
   @Prop()
   projectId?: string
 
-  @Prop()
+  @Prop({ required: true })
   name: string
 
   @Prop(raw({}))
@@ -20,14 +21,50 @@ export class Project {
   @Prop({ type: [AreaSchema] })
   areas?: Area[]
 
-  @Prop()
+  @Prop({ required: true })
   responsibleOrg?: string
+
+  @Prop()
+  referenceLink?: string
+
+  @Prop({ required: true })
+  startDate?: Date
+
+  @Prop()
+  createdAt?: Date
+
+  @Prop()
+  phase?: string
+
+  @Prop({ required: true })
+  currentState: string
+
+  @Prop()
+  measurementUnit: string
+
+  @Prop()
+  expectedQuantity: number
+
+  @Prop()
+  executedQuantity: number
+
+  @Prop()
+  projectValue: number
+
+  @Prop()
+  constructionWorkValue: number
+
+  @Prop()
+  infiltrationsSize: number
+
+  @Prop()
+  completedPercentage: number
 
   @Prop()
   location?: string
 
-  @Prop()
-  partners?: string[]
+  @Prop({ type: [PartnerSchema] })
+  partners?: Partner
 
   @Prop()
   thematicGroups?: string[]
