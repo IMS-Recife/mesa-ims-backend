@@ -1,16 +1,13 @@
 import { Injectable } from '@nestjs/common'
-
 import turfBuffer from '@turf/buffer'
 
 import { CoordinatesSearchDto } from './dto/coordinates-search.dto'
 import { GetLayersDto } from './dto/get-layers.dto'
 import { LayerFilterDto } from './dto/layer-filter.dto'
 import { LayerSearchDto } from './dto/layer-search.dto'
-
 import { CoordinateTypes } from './entities/enum/coordinate-types.enum'
 import { Layer } from './entities/enum/layer.enum'
 import { SoilUsageTypes } from './entities/location.constants'
-
 import { LocationRepository } from './location.repository'
 
 @Injectable()
@@ -21,7 +18,8 @@ export class LocationService {
     [Layer.NON_BUILT_AREA]: this.getNonBuiltAreas,
     [Layer.SOIL_USAGE]: this.getSoilUsage,
     [Layer.TREE]: this.getTree,
-    [Layer.URBAN_LICENSING]: this.getUrbanLicensing
+    [Layer.URBAN_LICENSING]: this.getUrbanLicensing,
+    [Layer.POPULATION_2010]: this.getPopulation
   }
 
   constructor(private readonly locationRepository: LocationRepository) {}
@@ -101,6 +99,11 @@ export class LocationService {
   }
 
   private async getUrbanLicensing(searchArea: CoordinatesSearchDto) {
+    const queryObj = this.buildQuery(searchArea)
+
+    return this.locationRepository.getUrbanLicensing(queryObj)
+  }
+  private async getPopulation(searchArea: CoordinatesSearchDto) {
     const queryObj = this.buildQuery(searchArea)
 
     return this.locationRepository.getUrbanLicensing(queryObj)

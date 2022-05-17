@@ -1,24 +1,14 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-
 import { Model } from 'mongoose'
 
 import { Layer } from './entities/enum/layer.enum'
 import { LayerBuiltArea, LayerBuiltAreaDocument } from './entities/layers/layer-built-area.schema'
-import {
-  LayerEnvironmentalLicensing,
-  LayerEnvironmentalLicensingDocument
-} from './entities/layers/layer-environmental-licensing.schema'
-import {
-  LayerNonBuiltArea,
-  LayerNonBuiltAreaDocument
-} from './entities/layers/layer-non-built-area.schema'
+import { LayerEnvironmentalLicensing, LayerEnvironmentalLicensingDocument } from './entities/layers/layer-environmental-licensing.schema'
+import { LayerNonBuiltArea, LayerNonBuiltAreaDocument } from './entities/layers/layer-non-built-area.schema'
 import { LayerSoilUsage, LayerSoilUsageDocument } from './entities/layers/layer-soil-usage.schema'
 import { LayerTree, LayerTreeDocument } from './entities/layers/layer-tree.schema'
-import {
-  LayerUrbanLicensing,
-  LayerUrbanLicensingDocument
-} from './entities/layers/layer-urban-licensing.schema'
+import { LayerUrbanLicensing, LayerUrbanLicensingDocument } from './entities/layers/layer-urban-licensing.schema'
 
 const DEFAULT_CHUNK_SIZE = 10000
 
@@ -44,7 +34,10 @@ export class LocationRepository {
     private soilUsageModel: Model<LayerSoilUsageDocument>,
 
     @InjectModel(LayerUrbanLicensing.name)
-    private urbanLicensingModel: Model<LayerUrbanLicensingDocument>
+    private urbanLicensingModel: Model<LayerUrbanLicensingDocument>,
+
+    @InjectModel(LayerUrbanLicensing.name)
+    private populationModel: Model<any>
   ) {
     this.layerModelRelation = {
       [Layer.BUILT_AREA]: this.builtAreaModel,
@@ -52,7 +45,8 @@ export class LocationRepository {
       [Layer.NON_BUILT_AREA]: this.nonBuiltAreaModel,
       [Layer.SOIL_USAGE]: this.soilUsageModel,
       [Layer.TREE]: this.treeModel,
-      [Layer.URBAN_LICENSING]: this.urbanLicensingModel
+      [Layer.URBAN_LICENSING]: this.urbanLicensingModel,
+      [Layer.POPULATION_2010]: this.populationModel
     }
   }
 
@@ -88,6 +82,11 @@ export class LocationRepository {
         'properties.categoria_empreendimento',
         'properties.empreendimento_de_impacto'
       ])
+  }
+  async getPopulation(queryObj: any): Promise<any[]> {
+    return this.populationModel
+      .find(queryObj)
+      .select(['geometry.coordinates'])
   }
 
   async getLocationProperties(layerName: Layer, locationId: string) {
@@ -127,6 +126,8 @@ export class LocationRepository {
       return resultArray
     }, [])
   }
+
+  
 
   async addSoilUsage(soilUsageData: any[]) {
     await this.soilUsageModel.insertMany(soilUsageData, { ordered: false })
