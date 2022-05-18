@@ -94,19 +94,22 @@ export class LocationService {
 
   private async getTree(searchArea: CoordinatesSearchDto) {
     const queryObj = this.buildQuery(searchArea)
-
+    console.log(queryObj);
     return this.locationRepository.getTree(queryObj)
   }
 
   private async getUrbanLicensing(searchArea: CoordinatesSearchDto) {
     const queryObj = this.buildQuery(searchArea)
-
+    console.log(queryObj);
     return this.locationRepository.getUrbanLicensing(queryObj)
   }
   private async getPopulation(searchArea: CoordinatesSearchDto) {
     const queryObj = this.buildQuery(searchArea)
-
-    return this.locationRepository.getUrbanLicensing(queryObj)
+    return this.locationRepository.getPopulation(queryObj)
+  }
+  public async getPopulationNoPost(collectionName: string) {
+    console.log(collectionName)
+    return this.locationRepository.getPopulationNoPost(collectionName)
   }
 
   private buildQuery(inside: CoordinatesSearchDto): {} {

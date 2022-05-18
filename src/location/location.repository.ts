@@ -6,6 +6,7 @@ import { Layer } from './entities/enum/layer.enum'
 import { LayerBuiltArea, LayerBuiltAreaDocument } from './entities/layers/layer-built-area.schema'
 import { LayerEnvironmentalLicensing, LayerEnvironmentalLicensingDocument } from './entities/layers/layer-environmental-licensing.schema'
 import { LayerNonBuiltArea, LayerNonBuiltAreaDocument } from './entities/layers/layer-non-built-area.schema'
+import { LayerPopulation2010, LayerPopulation2010Document } from './entities/layers/layer-population-2010.schema';
 import { LayerSoilUsage, LayerSoilUsageDocument } from './entities/layers/layer-soil-usage.schema'
 import { LayerTree, LayerTreeDocument } from './entities/layers/layer-tree.schema'
 import { LayerUrbanLicensing, LayerUrbanLicensingDocument } from './entities/layers/layer-urban-licensing.schema'
@@ -36,7 +37,7 @@ export class LocationRepository {
     @InjectModel(LayerUrbanLicensing.name)
     private urbanLicensingModel: Model<LayerUrbanLicensingDocument>,
 
-    @InjectModel(LayerUrbanLicensing.name)
+    @InjectModel(LayerPopulation2010.name)
     private populationModel: Model<any>
   ) {
     this.layerModelRelation = {
@@ -83,10 +84,19 @@ export class LocationRepository {
         'properties.empreendimento_de_impacto'
       ])
   }
-  async getPopulation(queryObj: any): Promise<any[]> {
-    return this.populationModel
+  async getPopulation(queryObj: any): Promise<LayerPopulation2010Document[]> {
+    console.log('aqui',queryObj)
+    let teste = await this.populationModel
       .find(queryObj)
-      .select(['geometry.coordinates'])
+      .select(DEFAULT_LOCATION_FIELDS)
+      console.log(teste);
+      return teste;
+  }
+  async getPopulationNoPost(nameColection: any) {
+    let teste = await this.populationModel
+      .find({nameColection})
+      console.log(teste);
+      return teste;
   }
 
   async getLocationProperties(layerName: Layer, locationId: string) {
@@ -139,5 +149,8 @@ export class LocationRepository {
 
   async addTrees(treesData: any[]) {
     await this.treeModel.insertMany(treesData, { ordered: false })
+  }
+  async addPopulation(populationData: any[]) {
+    await this.populationModel.insertMany(populationData, { ordered: false })
   }
 }

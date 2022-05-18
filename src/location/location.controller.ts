@@ -18,4 +18,8 @@ export class LocationController {
   async getLocationProperties(@Param('layerName') layerName: Layer, @Param('locationId') locationId: string) {
     return this.locationService.getLocationProperties(layerName, locationId)
   }
+  @Get('layers/:layerName')
+  async getLayer(@Param('layerName') layerName: string) {
+    return this.locationService.getPopulationNoPost(layerName)
+  }
 }
