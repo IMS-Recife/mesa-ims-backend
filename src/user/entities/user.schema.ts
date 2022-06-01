@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document, SchemaTypes } from 'mongoose'
 
-import { PasswordResetInfo } from './password-reset-info.schema'
 import { Project } from '../../project/entities/project.schema'
-import { Role } from './role.enum'
 import { Notification, NotificationSchema } from './notification/notification.schema'
+import { PasswordResetInfo } from './password-reset-info.schema'
+import { Role } from './role.enum'
 import { Vision, VisionSchema } from './vision/vision.schema'
 
 export type UserDocument = User & Document
@@ -23,7 +23,7 @@ export class User {
   @Prop({ type: PasswordResetInfo, required: false })
   passwordResetInfo?: PasswordResetInfo
 
-  @Prop({ type: [String], enum: Role, required: true })
+  @Prop({ type: [String], enum: Role, required: true})
   roles: Role[]
 
   @Prop({ required: false })

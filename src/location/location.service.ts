@@ -19,7 +19,7 @@ export class LocationService {
     [Layer.SOIL_USAGE]: this.getSoilUsage,
     [Layer.TREE]: this.getTree,
     [Layer.URBAN_LICENSING]: this.getUrbanLicensing,
-    [Layer.POPULATION_2010]: this.getPopulation
+    [Layer.POPULATION2010]: this.getPopulation
   }
 
   constructor(private readonly locationRepository: LocationRepository) {}
@@ -94,7 +94,7 @@ export class LocationService {
 
   private async getTree(searchArea: CoordinatesSearchDto) {
     const queryObj = this.buildQuery(searchArea)
-    console.log(queryObj);
+    console.log(' tree', searchArea);
     return this.locationRepository.getTree(queryObj)
   }
 
@@ -104,6 +104,7 @@ export class LocationService {
     return this.locationRepository.getUrbanLicensing(queryObj)
   }
   private async getPopulation(searchArea: CoordinatesSearchDto) {
+    console.log(' POP', searchArea);
     const queryObj = this.buildQuery(searchArea)
     return this.locationRepository.getPopulation(queryObj)
   }

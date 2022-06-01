@@ -5,5 +5,5 @@ export enum Layer {
   SOIL_USAGE = 'soilUsage',
   TREE = 'tree',
   URBAN_LICENSING = 'urbanLicensing',
-  POPULATION_2010 = 'population_2010'
+  POPULATION2010 = 'population2010'
 }

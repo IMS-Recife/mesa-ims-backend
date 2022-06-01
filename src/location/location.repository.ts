@@ -38,7 +38,7 @@ export class LocationRepository {
     private urbanLicensingModel: Model<LayerUrbanLicensingDocument>,
 
     @InjectModel(LayerPopulation2010.name)
-    private populationModel: Model<any>
+    private populationModel: Model<LayerPopulation2010Document>
   ) {
     this.layerModelRelation = {
       [Layer.BUILT_AREA]: this.builtAreaModel,
@@ -47,7 +47,7 @@ export class LocationRepository {
       [Layer.SOIL_USAGE]: this.soilUsageModel,
       [Layer.TREE]: this.treeModel,
       [Layer.URBAN_LICENSING]: this.urbanLicensingModel,
-      [Layer.POPULATION_2010]: this.populationModel
+      [Layer.POPULATION2010]: this.populationModel
     }
   }
 
@@ -72,6 +72,7 @@ export class LocationRepository {
   }
 
   async getTree(queryObj: any): Promise<LayerTreeDocument[]> {
+    console.log(queryObj);
     return this.treeModel.find(queryObj).select(DEFAULT_LOCATION_FIELDS)
   }
 
@@ -85,10 +86,10 @@ export class LocationRepository {
       ])
   }
   async getPopulation(queryObj: any): Promise<LayerPopulation2010Document[]> {
-    console.log('aqui',queryObj)
+    // console.log('aqui',queryObj)
     let teste = await this.populationModel
       .find(queryObj)
-      .select(DEFAULT_LOCATION_FIELDS)
+      // .select(['geometry.coordinates'])
       console.log(teste);
       return teste;
   }
