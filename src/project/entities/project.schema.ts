@@ -4,6 +4,7 @@ import { Document } from 'mongoose'
 
 import { Area, AreaSchema } from './area.schema'
 import { Partner, PartnerSchema } from './partner.schema'
+import { Relation, RelationSchema } from './relation.schema'
 
 export type ProjectDocument = Project & Document
 
@@ -27,7 +28,7 @@ export class Project {
   @Prop()
   referenceLink?: string
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   startDate?: Date
 
   @Prop()
@@ -65,6 +66,8 @@ export class Project {
 
   @Prop({ type: [PartnerSchema] })
   partners?: Partner
+  @Prop({ type: [RelationSchema] })
+  relations?: Relation
 
   @Prop()
   thematicGroups?: string[]

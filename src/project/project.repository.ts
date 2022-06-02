@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 
 import { Model } from 'mongoose'
+import { ProjectDTO } from './dto/project-create.dto'
 import { ProjectPatchDTO } from './dto/project-patch.dto'
 import { Area } from './entities/area.schema'
 
@@ -32,6 +33,11 @@ export class ProjectRepository {
       .sort({ name: 'asc' })
   }
 
+  async getPaged(nameSearch: string): Promise<ProjectDocument[]> {
+    return this.projectModel
+      .find({ name: { $regex: nameSearch, $options: 'i' } })
+      .sort({ name: 'asc' })
+  }
   async getAllByNameLike(nameSearch: string): Promise<ProjectDocument[]> {
     return this.projectModel
       .find({ name: { $regex: nameSearch, $options: 'i' } })
@@ -60,7 +66,7 @@ export class ProjectRepository {
     return this.projectModel.findById(projectId).select(fields)
   }
 
-  async create(project: Project): Promise<ProjectDocument> {
+  async create(project: ProjectDTO): Promise<ProjectDocument> {
     const newProject = new this.projectModel(project)
     return newProject.save()
   }

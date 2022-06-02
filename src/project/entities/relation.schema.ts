@@ -10,7 +10,7 @@ export class Relation {
   ODS: string
 
   @Prop()
-  partners: string[]
+  plans: string[]
 
   @Prop()
   thematicGroups: string[]

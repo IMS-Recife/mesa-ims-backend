@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator'
+import { IsNotEmpty, IsOptional } from 'class-validator'
 import { Area } from '../entities/area.schema'
 import { Partner } from '../entities/partner.schema'
 import { Relation } from '../entities/relation.schema'
@@ -14,7 +14,6 @@ export class ProjectDTO {
   currentState: string
   areas?: Area[]
   location?: string
-  partners?: Partner[]
   thematicGroups?: string[]
   lastUpdate?: Date = new Date()
   referenceLink?: string
@@ -27,6 +26,7 @@ export class ProjectDTO {
   projectValue: number
   infiltrationsSize: number
   constructionWorkValue: number
+  partners?: Partner[]
   completedPercentage: number
   relations: Relation[]
 }

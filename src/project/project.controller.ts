@@ -29,6 +29,16 @@ export class ProjectController {
   ) {
     return this.projectService.getAll(name, location, responsibleOrg, relatedOrg, tematicGroup)
   }
+  @Get('/getPaged')
+  async getPaged(
+    @Query('name') name: string,
+    @Query('location') location: string,
+    @Query('responsibleOrg') responsibleOrg: string,
+    @Query('relatedOrg') relatedOrg: string,
+    @Query('tematicGroup') tematicGroup: string
+  ) {
+    return this.projectService.getPaged(name)
+  }
 
   @Get(':projectId/areas')
   async getProjectAreas(

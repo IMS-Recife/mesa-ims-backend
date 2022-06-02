@@ -8,7 +8,6 @@ export interface ProjectPatchDTO {
   currentState?: string
   areas?: Area[]
   location?: string
-  partners?: Partner[]
   thematicGroups?: string[]
   lastUpdate?: Date
   referenceLink?: string
@@ -22,5 +21,6 @@ export interface ProjectPatchDTO {
   infiltrationsSize?: number
   constructionWorkValue?: number
   completedPercentage?: number
+  partners?: Partner[]
   Relations?: Relation[]
 }

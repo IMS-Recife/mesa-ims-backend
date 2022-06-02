@@ -10,12 +10,12 @@ import { AppModule } from './app.module'
 async function bootstrap() {
   const httpsOptions = {
     key: fs.readFileSync('./server.key'),
-    cert: fs.readFileSync('./server.cert'),
-  };
+    cert: fs.readFileSync('./server.cert')
+  }
 
   const app = await NestFactory.create(AppModule, {
-    httpsOptions,
-  });
+    // httpsOptions,
+  })
 
   const configService = app.get(ConfigService)
   const port = configService.get<number>('PORT')
@@ -30,8 +30,8 @@ async function bootstrap() {
 
   const config = new DocumentBuilder().setTitle('IMS').setVersion('1.0').build()
 
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('swagger', app, document);
+  const document = SwaggerModule.createDocument(app, config)
+  SwaggerModule.setup('swagger', app, document)
 
   app.use(helmet())
   app.enableCors()
