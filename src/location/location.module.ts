@@ -30,9 +30,14 @@ import { LocationService } from './location.service'
     MongooseModule.forFeature([{ name: LayerNonBuiltArea.name, schema: LayerNonBuiltAreaSchema }]),
     MongooseModule.forFeature([{ name: LayerSoilUsage.name, schema: LayerSoilUsageSchema }]),
     MongooseModule.forFeature([{ name: LayerTree.name, schema: LayerTreeSchema }]),
+<<<<<<< HEAD
     MongooseModule.forFeature([
       { name: LayerUrbanLicensing.name, schema: LayerUrbanLicensingSchema }
     ])
+=======
+    MongooseModule.forFeature([{ name: LayerUrbanLicensing.name, schema: LayerUrbanLicensingSchema }]),
+    MongooseModule.forFeature([{ name: LayerPopulation2010.name, schema: LayerPopulation2010Schema }]),
+>>>>>>> eed6d64b9f79d1e40d4f8ef506e6f92c8465ce8b
   ],
   controllers: [LocationController],
   providers: [LocationService, LocationRepository],

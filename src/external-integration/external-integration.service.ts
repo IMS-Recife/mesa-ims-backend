@@ -1,16 +1,15 @@
 import { Injectable, Logger } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-
 import axios, { AxiosResponse } from 'axios'
-import * as Papa from 'papaparse'
 import * as FormData from 'form-data'
+import * as Papa from 'papaparse'
 
+import { CoordinateTypes } from '../location/entities/enum/coordinate-types.enum'
+import { FEATURE } from '../location/entities/location.constants'
+import { LocationService } from '../location/location.service'
 import { gisDataInfo } from './entities/gis-data-info.constants'
 import { IntegrationInfoDocument } from './entities/integration-info.schema'
 import { ExternalIntegrationRepository } from './external-integration.repository'
-import { FEATURE } from '../location/entities/location.constants'
-import { CoordinateTypes } from '../location/entities/enum/coordinate-types.enum'
-import { LocationService } from '../location/location.service'
 
 @Injectable()
 export class ExternalIntegrationService {
@@ -161,6 +160,25 @@ export class ExternalIntegrationService {
   }
 
   async fetchAndSaveTrees() {
+    for (let i = 0; i <= 258810; i = i + 10000) {
+      const formData = this.createArcGisPageFormData(i, gisDataInfo.trees.fields)
+
+      const trees: AxiosResponse<any, any> = await axios.post(
+        gisDataInfo.trees.url,
+        formData,
+        {
+          headers: formData.getHeaders()
+        }
+      )
+
+      try {
+        await this.locationService.addTrees(trees.data.features)
+      } catch (error) {
+        this.logger.error(error)
+      }
+    }
+  }
+  async fetchAndSavePopulation() {
     for (let i = 0; i <= 258810; i = i + 10000) {
       const formData = this.createArcGisPageFormData(i, gisDataInfo.trees.fields)
 

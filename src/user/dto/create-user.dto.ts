@@ -14,6 +14,6 @@ export class CreateUserDto {
   password: string
 
   @IsEnum(Role, { each: true, message: 'Perfil selecionado deve ser Cidadão ou Investidor' })
-  @ArrayNotEmpty({ message: 'Perfil é obrigatório' })
+  @ArrayNotEmpty({ message: 'Perfil é obrigatório' },)
   roles: Role[]
 }
