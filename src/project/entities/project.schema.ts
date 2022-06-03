@@ -65,7 +65,7 @@ export class Project {
   location?: string
 
   @Prop({ type: [PartnerSchema] })
-  partners?: Partner
+  partners?: Partner[]
   @Prop({ type: [RelationSchema] })
   relations?: Relation
 
