@@ -27,10 +27,13 @@ export class ProjectRepository {
       'info.tematicGroup': tematicGroup
     }
 
-    return this.projectModel
-      .find(queryObj)
-      .select(['name', 'info', 'areas.name'])
-      .sort({ name: 'asc' })
+    return (
+      this.projectModel
+        .find({})
+        // .find(queryObj)
+        // .select(['name', 'info', 'areas.name'])
+        .sort({ name: 'asc' })
+    )
   }
 
   async getPaged(nameSearch: string): Promise<ProjectDocument[]> {
@@ -67,8 +70,9 @@ export class ProjectRepository {
   }
 
   async create(project: ProjectDTO): Promise<ProjectDocument> {
-    const newProject = new this.projectModel(project)
-    return newProject.save()
+    // const newProject = new this.projectModel(project)
+    // return newProject.save()
+    return await this.projectModel.create(project)
   }
 
   async delete(projectId: string): Promise<ProjectDocument | null> {
