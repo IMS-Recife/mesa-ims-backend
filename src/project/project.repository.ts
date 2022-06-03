@@ -29,7 +29,8 @@ export class ProjectRepository {
 
     return (
       this.projectModel
-        .find(queryObj)
+        .find({})
+        // .find(queryObj)
         // .select(['name', 'info', 'areas.name'])
         .sort({ name: 'asc' })
     )
@@ -69,8 +70,9 @@ export class ProjectRepository {
   }
 
   async create(project: ProjectDTO): Promise<ProjectDocument> {
-    const newProject = new this.projectModel(project)
-    return newProject.save()
+    // const newProject = new this.projectModel(project)
+    // return newProject.save()
+    return await this.projectModel.create(project)
   }
 
   async delete(projectId: string): Promise<ProjectDocument | null> {

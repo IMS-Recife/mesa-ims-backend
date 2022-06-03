@@ -12,13 +12,15 @@ export class ProjectDTO {
   responsibleOrg: string
   @IsNotEmpty()
   currentState: string
-  areas?: Area[]
-  location?: string
-  thematicGroups?: string[]
-  lastUpdate?: Date = new Date()
-  referenceLink?: string
-  startDate?: Date
-  createdAt?: Date
+  areas: Area[]
+  location: string
+  // thematicGroups?: string[]
+  @IsOptional()
+  thematicGroups: string
+  lastUpdate: Date = new Date()
+  referenceLink: string
+  startDate: Date
+  createdAt: Date
   phase?: string
   measurementUnit: string
   expectedQuantity: number
@@ -26,7 +28,9 @@ export class ProjectDTO {
   projectValue: number
   infiltrationsSize: number
   constructionWorkValue: number
-  partners?: Partner[]
+  // partners?: Partner[]
+  @IsOptional()
+  partners: string
   completedPercentage: number
   relations: Relation[]
 }
