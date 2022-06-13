@@ -4,6 +4,7 @@ import { JwtService } from '@nestjs/jwt'
 import axios, { AxiosResponse } from 'axios'
 import * as bcrypt from 'bcrypt'
 import { OAuth2Client, TokenPayload } from 'google-auth-library'
+import { Role } from 'src/user/entities/role.enum'
 
 import { MailService } from '../mail/mail.service'
 import { ListUserDto } from '../user/dto/list-user.dto'
@@ -59,14 +60,15 @@ export class AuthService {
 
   async loginGoogle(credential: string): Promise<any> {
     const { email, name } = await this.verifyGoogleToken(credential)
-
-    const user = await this.userService.findOneByEmail(email)
+    console.log(credential);
+    let user = await this.userService.findOneByEmail(email)
 
     if (!user) {
       console.log(email);
       // throw new PreconditionFailedException('Login via Google aceito, mas usuário deve informar um perfil antes de ter acesso ao sistema')
-      throw new PreconditionFailedException(
-        {error: 'Por favor, digite uma senha', email, name})
+      // throw new PreconditionFailedException(
+      //   {error: 'Por favor, digite uma senha', email, name})
+      user = await this.userService.create({name, email, password: credential, roles:[Role.CITIZEN]});
     }
 
     return this.signUser(user)

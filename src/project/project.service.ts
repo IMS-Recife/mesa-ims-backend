@@ -1,4 +1,7 @@
 import { Injectable } from '@nestjs/common'
+import { ProjectDTO } from './dto/project-create.dto'
+import { ProjectPatchDTO } from './dto/project-patch.dto'
+import { Project } from './entities/project.schema'
 
 import { ProjectRepository } from './project.repository'
 
@@ -15,6 +18,9 @@ export class ProjectService {
   ) {
     return this.projectRepository.getAll(name, location, responsibleOrg, relatedOrg, tematicGroup)
   }
+  async getPaged(name) {
+    return this.projectRepository.getPaged(name)
+  }
 
   async getAllByNameLike(name: string) {
     return this.projectRepository.getAllByNameLike(name)
@@ -25,6 +31,30 @@ export class ProjectService {
   }
 
   async findOneById(projectId: string) {
-    return this.projectRepository.findOneById(projectId)
+    try {
+      return this.projectRepository.findOneById(projectId)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async create(project: ProjectDTO) {
+    const newProject = {
+      ...project,
+      lastUpdate: new Date()
+    }
+
+    if (!newProject.location) {
+      newProject.location = 'Recife - PE'
+    }
+    return this.projectRepository.create(newProject)
+  }
+
+  async update(projectId: string, project: ProjectPatchDTO) {
+    return this.projectRepository.update(projectId, project)
+  }
+
+  async delete(projectId: string) {
+    return this.projectRepository.delete(projectId)
   }
 }

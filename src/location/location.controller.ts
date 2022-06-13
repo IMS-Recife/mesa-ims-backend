@@ -15,7 +15,10 @@ export class LocationController {
   }
 
   @Get('layers/:layerName/:locationId/properties')
-  async getLocationProperties(@Param('layerName') layerName: Layer, @Param('locationId') locationId: string) {
+  async getLocationProperties(
+    @Param('layerName') layerName: Layer,
+    @Param('locationId') locationId: string
+  ) {
     return this.locationService.getLocationProperties(layerName, locationId)
   }
   @Get('layers/:layerName')

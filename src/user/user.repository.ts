@@ -42,10 +42,7 @@ export class UserRepository {
   }
 
   async deleteVision(userId: string, visionId: string) {
-    return this.userModel.updateOne(
-      { _id: userId },
-      { $pull: { visions: { _id: visionId } } }
-    )
+    return this.userModel.updateOne({ _id: userId }, { $pull: { visions: { _id: visionId } } })
   }
 
   async findUserPopulateFavProjects(userId: string): Promise<UserDocument> {
@@ -56,13 +53,10 @@ export class UserRepository {
   }
 
   async removeFavoriteProject(userId: string, projectId: string) {
-    return this.userModel.updateOne(
-      { _id: userId },
-      { $pull: { favoriteProjects: projectId } }
-    )
+    return this.userModel.updateOne({ _id: userId }, { $pull: { favoriteProjects: projectId } })
   }
 
-  async getNotifications(id: string, limit: string = '100'): Promise<UserDocument> {
+  async getNotifications(id: string, limit = '100'): Promise<UserDocument> {
     return this.userModel.findById(id, { notifications: { $slice: ['$notifications', +limit] } })
   }
 
