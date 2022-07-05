@@ -4,12 +4,28 @@ import { Model } from 'mongoose'
 
 import { Layer } from './entities/enum/layer.enum'
 import { LayerBuiltArea, LayerBuiltAreaDocument } from './entities/layers/layer-built-area.schema'
-import { LayerEnvironmentalLicensing, LayerEnvironmentalLicensingDocument } from './entities/layers/layer-environmental-licensing.schema'
-import { LayerNonBuiltArea, LayerNonBuiltAreaDocument } from './entities/layers/layer-non-built-area.schema'
-import { LayerPopulation2010, LayerPopulation2010Document } from './entities/layers/layer-population-2010.schema';
+import {
+  LayerEnvironmentalLicensing,
+  LayerEnvironmentalLicensingDocument
+} from './entities/layers/layer-environmental-licensing.schema'
+import {
+  LayerNonBuiltArea,
+  LayerNonBuiltAreaDocument
+} from './entities/layers/layer-non-built-area.schema'
+import {
+  LayerPopulation2010,
+  LayerPopulation2010Document
+} from './entities/layers/layer-population-2010.schema'
+import {
+  LayerPercentageHouseholdsTreesDocument,
+  PercentageHouseholdsTrees
+} from './entities/layers/layer-percentage-households-trees.schema'
 import { LayerSoilUsage, LayerSoilUsageDocument } from './entities/layers/layer-soil-usage.schema'
 import { LayerTree, LayerTreeDocument } from './entities/layers/layer-tree.schema'
-import { LayerUrbanLicensing, LayerUrbanLicensingDocument } from './entities/layers/layer-urban-licensing.schema'
+import {
+  LayerUrbanLicensing,
+  LayerUrbanLicensingDocument
+} from './entities/layers/layer-urban-licensing.schema'
 
 const DEFAULT_CHUNK_SIZE = 10000
 
@@ -38,7 +54,9 @@ export class LocationRepository {
     private urbanLicensingModel: Model<LayerUrbanLicensingDocument>,
 
     @InjectModel(LayerPopulation2010.name)
-    private populationModel: Model<LayerPopulation2010Document>
+    private populationModel: Model<LayerPopulation2010Document>,
+    @InjectModel(PercentageHouseholdsTrees.name)
+    private percentageHouseholdsTreesModel: Model<LayerPercentageHouseholdsTreesDocument>
   ) {
     this.layerModelRelation = {
       [Layer.BUILT_AREA]: this.builtAreaModel,
@@ -72,7 +90,7 @@ export class LocationRepository {
   }
 
   async getTree(queryObj: any): Promise<LayerTreeDocument[]> {
-    console.log(queryObj);
+    console.log(queryObj)
     return this.treeModel.find(queryObj).select(DEFAULT_LOCATION_FIELDS)
   }
 
@@ -87,17 +105,20 @@ export class LocationRepository {
   }
   async getPopulation(queryObj: any): Promise<LayerPopulation2010Document[]> {
     // console.log('aqui',queryObj)
-    let teste = await this.populationModel
-      .find(queryObj)
-      // .select(['geometry.coordinates'])
-      console.log(teste);
-      return teste;
+    let teste = await this.populationModel.find(queryObj)
+    // .select(['geometry.coordinates'])
+    console.log(teste)
+    return teste
+  }
+  async getPercentageHouseholdsTrees(
+    queryObj: any
+  ): Promise<LayerPercentageHouseholdsTreesDocument[]> {
+    return this.populationModel.find(queryObj)
   }
   async getPopulationNoPost(nameColection: any) {
-    let teste = await this.populationModel
-      .find({nameColection})
-      console.log(teste);
-      return teste;
+    let teste = await this.populationModel.find({ nameColection })
+    console.log(teste)
+    return teste
   }
 
   async getLocationProperties(layerName: Layer, locationId: string) {
@@ -137,8 +158,6 @@ export class LocationRepository {
       return resultArray
     }, [])
   }
-
-  
 
   async addSoilUsage(soilUsageData: any[]) {
     await this.soilUsageModel.insertMany(soilUsageData, { ordered: false })

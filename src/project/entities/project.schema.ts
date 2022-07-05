@@ -67,14 +67,14 @@ export class Project {
   // @Prop({ type: [PartnerSchema] })
   // partners?: Partner
   @Prop()
-  partners?: string
+  partners: string
   @Prop({ type: [RelationSchema] })
   relations?: Relation
 
   // @Prop()
   // thematicGroups?: string[]
   @Prop()
-  thematicGroups?: string
+  thematicGroups: string
 
   @Prop()
   lastUpdate?: Date = new Date()

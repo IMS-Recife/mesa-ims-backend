@@ -60,7 +60,7 @@ export class ProjectController {
   }
 
   @Put(':projectId')
-  async update(@Param('projectId') projectId: string, @Body() project: ProjectDTO) {
+  async update(@Param('projectId') projectId: string, @Body() project: ProjectPatchDTO) {
     return this.projectService.update(projectId, project)
   }
 
