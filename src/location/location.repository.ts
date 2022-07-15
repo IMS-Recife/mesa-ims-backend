@@ -106,7 +106,7 @@ export class LocationRepository {
   }
   async getPopulation(queryObj: any): Promise<LayerPopulation2010Document[]> {
     // console.log('aqui',queryObj)
-    let teste = await this.populationModel.find(queryObj)
+    const teste = await this.populationModel.find(queryObj)
     // .select(['geometry.coordinates'])
     console.log(teste)
     return teste
@@ -117,7 +117,7 @@ export class LocationRepository {
     return this.percentageHouseholdsTreesModel.find(queryObj)
   }
   async getPopulationNoPost(nameColection: any) {
-    let teste = await this.populationModel.find({ nameColection })
+    const teste = await this.populationModel.find({ nameColection })
     console.log(teste)
     return teste
   }
