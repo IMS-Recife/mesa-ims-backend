@@ -14,7 +14,7 @@ export class ProjectDTO {
   currentState: string
   areas: Area[]
   location: string
-  // thematicGroups?: string[]
+  // thematicGroups?: string
   @IsOptional()
   thematicGroups: string
   lastUpdate: Date = new Date()

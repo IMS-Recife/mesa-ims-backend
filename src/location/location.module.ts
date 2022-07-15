@@ -14,6 +14,10 @@ import {
   LayerPopulation2010,
   LayerPopulation2010Schema
 } from './entities/layers/layer-population-2010.schema'
+import {
+  PercentageHouseholdsTrees,
+  PercentageHouseholdsTreesSchema
+} from './entities/layers/layer-percentage-households-trees.schema'
 import { LayerSoilUsage, LayerSoilUsageSchema } from './entities/layers/layer-soil-usage.schema'
 import { LayerTree, LayerTreeSchema } from './entities/layers/layer-tree.schema'
 import {
@@ -36,6 +40,9 @@ import { LocationService } from './location.service'
     MongooseModule.forFeature([{ name: LayerTree.name, schema: LayerTreeSchema }]),
     MongooseModule.forFeature([
       { name: LayerPopulation2010.name, schema: LayerPopulation2010Schema }
+    ]),
+    MongooseModule.forFeature([
+      { name: PercentageHouseholdsTrees.name, schema: PercentageHouseholdsTreesSchema }
     ]),
     MongooseModule.forFeature([
       { name: LayerUrbanLicensing.name, schema: LayerUrbanLicensingSchema }

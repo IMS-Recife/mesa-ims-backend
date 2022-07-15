@@ -19,7 +19,8 @@ export class LocationService {
     [Layer.SOIL_USAGE]: this.getSoilUsage,
     [Layer.TREE]: this.getTree,
     [Layer.URBAN_LICENSING]: this.getUrbanLicensing,
-    [Layer.POPULATION2010]: this.getPopulation
+    [Layer.POPULATION2010]: this.getPopulation,
+    [Layer.PERCENTAGEHOUSEHOLDSTREES]: this.getPercentageHouseholdsTrees
   }
 
   constructor(private readonly locationRepository: LocationRepository) {}
@@ -94,20 +95,39 @@ export class LocationService {
 
   private async getTree(searchArea: CoordinatesSearchDto) {
     const queryObj = this.buildQuery(searchArea)
-    console.log(' tree', searchArea);
+    console.log(' tree', searchArea)
     return this.locationRepository.getTree(queryObj)
   }
 
   private async getUrbanLicensing(searchArea: CoordinatesSearchDto) {
     const queryObj = this.buildQuery(searchArea)
-    console.log(queryObj);
+    console.log(queryObj)
     return this.locationRepository.getUrbanLicensing(queryObj)
   }
   private async getPopulation(searchArea: CoordinatesSearchDto) {
-    console.log(' POP', searchArea);
+    console.log(' POP', searchArea)
     const queryObj = this.buildQuery(searchArea)
     return this.locationRepository.getPopulation(queryObj)
   }
+  private async getPercentageHouseholdsTrees(searchArea: CoordinatesSearchDto) {
+    // console.log('getPercentageHouseholdsTrees', searchArea)
+    const queryObj = this.buildQuery(searchArea)
+    return this.locationRepository.getPercentageHouseholdsTrees(queryObj)
+  }
+  // private async getPopulation(searchArea: CoordinatesSearchDto, filter?: LayerFilterDto) {
+  //   console.log(' INDI', searchArea)
+  //   const queryObj = this.buildQuery(searchArea)
+
+  //   if (filter && filter.soilCategories && filter.soilCategories.length !== 0) {
+  //     const buildingTypes = filter.soilCategories.flatMap(
+  //       (soilCategory) => SoilUsageTypes[soilCategory]
+  //     )
+
+  //     queryObj['properties.TIPOEMPREENDIMENTO'] = { $in: buildingTypes }
+  //   }
+
+  //   return this.locationRepository.getPopulation(queryObj)
+  // }
   public async getPopulationNoPost(collectionName: string) {
     console.log(collectionName)
     return this.locationRepository.getPopulationNoPost(collectionName)
