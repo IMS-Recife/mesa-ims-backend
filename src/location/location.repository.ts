@@ -65,7 +65,8 @@ export class LocationRepository {
       [Layer.SOIL_USAGE]: this.soilUsageModel,
       [Layer.TREE]: this.treeModel,
       [Layer.URBAN_LICENSING]: this.urbanLicensingModel,
-      [Layer.POPULATION2010]: this.populationModel
+      [Layer.POPULATION2010]: this.populationModel,
+      [Layer.PERCENTAGEHOUSEHOLDSTREES]: this.percentageHouseholdsTreesModel
     }
   }
 
@@ -113,7 +114,7 @@ export class LocationRepository {
   async getPercentageHouseholdsTrees(
     queryObj: any
   ): Promise<LayerPercentageHouseholdsTreesDocument[]> {
-    return this.populationModel.find(queryObj)
+    return this.percentageHouseholdsTreesModel.find(queryObj)
   }
   async getPopulationNoPost(nameColection: any) {
     let teste = await this.populationModel.find({ nameColection })
