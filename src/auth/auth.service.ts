@@ -1,4 +1,11 @@
-import { ForbiddenException, Injectable, NotFoundException, PreconditionFailedException, UnauthorizedException, UnprocessableEntityException } from '@nestjs/common'
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+  PreconditionFailedException,
+  UnauthorizedException,
+  UnprocessableEntityException
+} from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
 import axios, { AxiosResponse } from 'axios'
@@ -60,15 +67,19 @@ export class AuthService {
 
   async loginGoogle(credential: string): Promise<any> {
     const { email, name } = await this.verifyGoogleToken(credential)
-    console.log(credential);
     let user = await this.userService.findOneByEmail(email)
 
     if (!user) {
-      console.log(email);
+      // console.log(email);
       // throw new PreconditionFailedException('Login via Google aceito, mas usuário deve informar um perfil antes de ter acesso ao sistema')
       // throw new PreconditionFailedException(
       //   {error: 'Por favor, digite uma senha', email, name})
-      user = await this.userService.create({name, email, password: credential, roles:[Role.CITIZEN]});
+      user = await this.userService.create({
+        name,
+        email,
+        password: credential,
+        roles: [Role.CITIZEN]
+      })
     }
 
     return this.signUser(user)
