@@ -20,7 +20,17 @@ export class LocationService {
     [Layer.TREE]: this.getTree,
     [Layer.URBAN_LICENSING]: this.getUrbanLicensing,
     [Layer.POPULATION2010]: this.getPopulation,
-    [Layer.PERCENTAGEHOUSEHOLDSTREES]: this.getPercentageHouseholdsTrees
+    [Layer.PERCENTAGEHOUSEHOLDSTREES]: this.getPercentageHouseholdsTrees,
+    [Layer.PERCENTAGEHOUSEHOLDSWHEELCHAIRRAMPSURROUNDINGS2010]:
+      this.getPercentageHouseholdsWheelchairRampSurroundings2010,
+    [Layer.PERCENTAGEPOPULATIONPIPED2010]: this.getPercentagePopulationPiped2010,
+    [Layer.PERCENTAGEPOPULATIONGARBAGECOLLECTION2010]:
+      this.getPercentagePopulationGarbageCollection2010,
+    [Layer.PERCENTAGEPOPULATIONSANITARYSEWAGE2010]: this.getPercentagePopulationSanitarySewage2010,
+    [Layer.AVERAGEINCOME2010]: this.getAverageIncome2010,
+    [Layer.NUMBERHOUSEHOLDS2010]: this.getNumberHouseholds2010,
+    [Layer.DEMOGRAPHICDENSITY2010]: this.getDemographicDensity2010,
+    [Layer.POPULATIONGROWTH20002010]: this.getPopulationGrowth20002010
   }
 
   constructor(private readonly locationRepository: LocationRepository) {}
@@ -101,36 +111,49 @@ export class LocationService {
 
   private async getUrbanLicensing(searchArea: CoordinatesSearchDto) {
     const queryObj = this.buildQuery(searchArea)
-    console.log(queryObj)
     return this.locationRepository.getUrbanLicensing(queryObj)
   }
   private async getPopulation(searchArea: CoordinatesSearchDto) {
-    console.log(' POP', searchArea)
     const queryObj = this.buildQuery(searchArea)
     return this.locationRepository.getPopulation(queryObj)
   }
   private async getPercentageHouseholdsTrees(searchArea: CoordinatesSearchDto) {
-    // console.log('getPercentageHouseholdsTrees', searchArea)
     const queryObj = this.buildQuery(searchArea)
     return this.locationRepository.getPercentageHouseholdsTrees(queryObj)
   }
-  // private async getPopulation(searchArea: CoordinatesSearchDto, filter?: LayerFilterDto) {
-  //   console.log(' INDI', searchArea)
-  //   const queryObj = this.buildQuery(searchArea)
-
-  //   if (filter && filter.soilCategories && filter.soilCategories.length !== 0) {
-  //     const buildingTypes = filter.soilCategories.flatMap(
-  //       (soilCategory) => SoilUsageTypes[soilCategory]
-  //     )
-
-  //     queryObj['properties.TIPOEMPREENDIMENTO'] = { $in: buildingTypes }
-  //   }
-
-  //   return this.locationRepository.getPopulation(queryObj)
-  // }
-  public async getPopulationNoPost(collectionName: string) {
-    console.log(collectionName)
-    return this.locationRepository.getPopulationNoPost(collectionName)
+  private async getPercentageHouseholdsWheelchairRampSurroundings2010(
+    searchArea: CoordinatesSearchDto
+  ) {
+    const queryObj = this.buildQuery(searchArea)
+    return this.locationRepository.getPercentageHouseholdsWheelchairRampSurroundings2010(queryObj)
+  }
+  private async getPercentagePopulationPiped2010(searchArea: CoordinatesSearchDto) {
+    const queryObj = this.buildQuery(searchArea)
+    return this.locationRepository.getPercentagePopulationPiped2010(queryObj)
+  }
+  private async getPercentagePopulationGarbageCollection2010(searchArea: CoordinatesSearchDto) {
+    const queryObj = this.buildQuery(searchArea)
+    return this.locationRepository.getPercentagePopulationGarbageCollection2010(queryObj)
+  }
+  private async getPercentagePopulationSanitarySewage2010(searchArea: CoordinatesSearchDto) {
+    const queryObj = this.buildQuery(searchArea)
+    return this.locationRepository.getPercentagePopulationSanitarySewage2010(queryObj)
+  }
+  private async getAverageIncome2010(searchArea: CoordinatesSearchDto) {
+    const queryObj = this.buildQuery(searchArea)
+    return this.locationRepository.getAverageIncome2010(queryObj)
+  }
+  private async getNumberHouseholds2010(searchArea: CoordinatesSearchDto) {
+    const queryObj = this.buildQuery(searchArea)
+    return this.locationRepository.getNumberHouseholds2010(queryObj)
+  }
+  private async getDemographicDensity2010(searchArea: CoordinatesSearchDto) {
+    const queryObj = this.buildQuery(searchArea)
+    return this.locationRepository.getDemographicDensity2010(queryObj)
+  }
+  private async getPopulationGrowth20002010(searchArea: CoordinatesSearchDto) {
+    const queryObj = this.buildQuery(searchArea)
+    return this.locationRepository.getPopulationGrowth20002010(queryObj)
   }
 
   private buildQuery(inside: CoordinatesSearchDto): {} {

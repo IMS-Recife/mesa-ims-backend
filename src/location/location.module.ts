@@ -28,6 +28,38 @@ import {
 import { LocationController } from './location.controller'
 import { LocationRepository } from './location.repository'
 import { LocationService } from './location.service'
+import {
+  PercentageHouseholdsWheelchairRampSurroundings2010,
+  PercentageHouseholdsWheelchairRampSurroundings2010Schema
+} from './entities/layers/layer-percentage-households-wheelchair-ramp-surroundings-2010.schema'
+import {
+  PercentagePopulationPiped2010,
+  PercentagePopulationPiped2010Schema
+} from './entities/layers/layer-percentage-population-piped-2010.schema'
+import {
+  PercentagePopulationGarbageCollection2010,
+  PercentagePopulationGarbageCollection2010Schema
+} from './entities/layers/layer-percentage-population-garbage-collection-2010.schema'
+import {
+  PercentagePopulationSanitarySewage2010,
+  PercentagePopulationSanitarySewage2010Schema
+} from './entities/layers/layer-percentage-population-sanitary-sewage-2010.schema'
+import {
+  AverageIncome2010,
+  AverageIncome2010Schema
+} from './entities/layers/layer-average-income-2010.schema'
+import {
+  NumberHouseholds2010,
+  NumberHouseholds2010Schema
+} from './entities/layers/layer-number-households-2010.schema'
+import {
+  DemographicDensity2010,
+  DemographicDensity2010Schema
+} from './entities/layers/layer-demographic-density-2010.schema'
+import {
+  PopulationGrowth20002010,
+  PopulationGrowth20002010Schema
+} from './entities/layers/layer-population-growth-20002010.schema'
 
 @Module({
   imports: [
@@ -43,6 +75,54 @@ import { LocationService } from './location.service'
     ]),
     MongooseModule.forFeature([
       { name: PercentageHouseholdsTrees.name, schema: PercentageHouseholdsTreesSchema }
+    ]),
+    MongooseModule.forFeature([
+      {
+        name: PercentageHouseholdsWheelchairRampSurroundings2010.name,
+        schema: PercentageHouseholdsWheelchairRampSurroundings2010Schema
+      }
+    ]),
+    MongooseModule.forFeature([
+      {
+        name: PercentagePopulationSanitarySewage2010.name,
+        schema: PercentagePopulationSanitarySewage2010Schema
+      }
+    ]),
+    MongooseModule.forFeature([
+      {
+        name: PercentagePopulationGarbageCollection2010.name,
+        schema: PercentagePopulationGarbageCollection2010Schema
+      }
+    ]),
+    MongooseModule.forFeature([
+      {
+        name: PercentagePopulationPiped2010.name,
+        schema: PercentagePopulationPiped2010Schema
+      }
+    ]),
+    MongooseModule.forFeature([
+      {
+        name: AverageIncome2010.name,
+        schema: AverageIncome2010Schema
+      }
+    ]),
+    MongooseModule.forFeature([
+      {
+        name: NumberHouseholds2010.name,
+        schema: NumberHouseholds2010Schema
+      }
+    ]),
+    MongooseModule.forFeature([
+      {
+        name: DemographicDensity2010.name,
+        schema: DemographicDensity2010Schema
+      }
+    ]),
+    MongooseModule.forFeature([
+      {
+        name: PopulationGrowth20002010.name,
+        schema: PopulationGrowth20002010Schema
+      }
     ]),
     MongooseModule.forFeature([
       { name: LayerUrbanLicensing.name, schema: LayerUrbanLicensingSchema }

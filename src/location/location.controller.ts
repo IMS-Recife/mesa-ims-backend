@@ -21,8 +21,4 @@ export class LocationController {
   ) {
     return this.locationService.getLocationProperties(layerName, locationId)
   }
-  @Get('layers/:layerName')
-  async getLayer(@Param('layerName') layerName: string) {
-    return this.locationService.getPopulationNoPost(layerName)
-  }
 }
