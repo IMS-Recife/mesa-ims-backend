@@ -14,7 +14,7 @@ async function bootstrap() {
   }
 
   const app = await NestFactory.create(AppModule, {
-    httpsOptions
+    // httpsOptions
   })
 
   const configService = app.get(ConfigService)
