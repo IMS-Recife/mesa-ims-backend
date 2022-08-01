@@ -55,6 +55,12 @@ import {
   LayerPopulationGrowth20002010Document,
   PopulationGrowth20002010
 } from './entities/layers/layer-population-growth-20002010.schema'
+import {
+  LayerMetroStation,
+  LayerMetroStationDocument
+} from './entities/layers/layer-metro-station.schema'
+import { LayerBlueStrip, LayerBlueStripDocument } from './entities/layers/layer-blue-strip.schema'
+import { LayerMetroLine, LayerMetroLineDocument } from './entities/layers/layer-metro-line.schema'
 
 const DEFAULT_CHUNK_SIZE = 10000
 
@@ -78,6 +84,15 @@ export class LocationRepository {
 
     @InjectModel(LayerSoilUsage.name)
     private soilUsageModel: Model<LayerSoilUsageDocument>,
+
+    @InjectModel(LayerMetroStation.name)
+    private metroStationModel: Model<LayerBlueStripDocument>,
+
+    @InjectModel(LayerMetroLine.name)
+    private metroLineModel: Model<LayerMetroLineDocument>,
+
+    @InjectModel(LayerBlueStrip.name)
+    private blueStripModel: Model<LayerBlueStripDocument>,
 
     @InjectModel(LayerUrbanLicensing.name)
     private urbanLicensingModel: Model<LayerUrbanLicensingDocument>,
@@ -108,6 +123,9 @@ export class LocationRepository {
       [Layer.ENVIRONMENTAL_LICENSING]: this.envLicensingModel,
       [Layer.NON_BUILT_AREA]: this.nonBuiltAreaModel,
       [Layer.SOIL_USAGE]: this.soilUsageModel,
+      [Layer.METROSTATION]: this.metroStationModel,
+      [Layer.BLUESTRIP]: this.blueStripModel,
+      [Layer.METROLINE]: this.metroLineModel,
       [Layer.TREE]: this.treeModel,
       [Layer.URBAN_LICENSING]: this.urbanLicensingModel,
       [Layer.POPULATION2010]: this.populationModel,
@@ -159,6 +177,15 @@ export class LocationRepository {
         'properties.categoria_empreendimento',
         'properties.empreendimento_de_impacto'
       ])
+  }
+  async getMetroStation(queryObj: any): Promise<LayerMetroStationDocument[]> {
+    return this.metroStationModel.find(queryObj)
+  }
+  async getBlueStrip(queryObj: any): Promise<LayerBlueStripDocument[]> {
+    return this.blueStripModel.find(queryObj)
+  }
+  async getMetroLine(queryObj: any): Promise<LayerMetroLineDocument[]> {
+    return this.metroLineModel.find(queryObj)
   }
   async getPopulation(queryObj: any): Promise<LayerPopulation2010Document[]> {
     return this.populationModel.find(queryObj)

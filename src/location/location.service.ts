@@ -17,6 +17,9 @@ export class LocationService {
     [Layer.ENVIRONMENTAL_LICENSING]: this.getEnvLicensing,
     [Layer.NON_BUILT_AREA]: this.getNonBuiltAreas,
     [Layer.SOIL_USAGE]: this.getSoilUsage,
+    [Layer.METROSTATION]: this.getMetroStation,
+    [Layer.METROLINE]: this.getMetroLine,
+    [Layer.BLUESTRIP]: this.getBlueStrip,
     [Layer.TREE]: this.getTree,
     [Layer.URBAN_LICENSING]: this.getUrbanLicensing,
     [Layer.POPULATION2010]: this.getPopulation,
@@ -101,6 +104,31 @@ export class LocationService {
     }
 
     return this.locationRepository.getSoilUsage(queryObj)
+  }
+  // private async getMobility(searchArea: CoordinatesSearchDto, filter?: LayerFilterDto) {
+  //   const queryObj = this.buildQuery(searchArea)
+  //   if (filter && filter.soilCategories && filter.soilCategories.length !== 0) {
+  //     const buildingTypes = filter.soilCategories.flatMap(
+  //       (soilCategory) => SoilUsageTypes[soilCategory]
+  //     )
+
+  //     queryObj['properties.TIPOEMPREENDIMENTO'] = { $in: buildingTypes }
+  //   }
+
+  //   return this.locationRepository.getSoilUsage(queryObj)
+  // }
+
+  private async getMetroStation(searchArea: CoordinatesSearchDto) {
+    const queryObj = this.buildQuery(searchArea)
+    return this.locationRepository.getMetroStation(queryObj)
+  }
+  private async getBlueStrip(searchArea: CoordinatesSearchDto) {
+    const queryObj = this.buildQuery(searchArea)
+    return this.locationRepository.getBlueStrip(queryObj)
+  }
+  private async getMetroLine(searchArea: CoordinatesSearchDto) {
+    const queryObj = this.buildQuery(searchArea)
+    return this.locationRepository.getMetroLine(queryObj)
   }
 
   private async getTree(searchArea: CoordinatesSearchDto) {
