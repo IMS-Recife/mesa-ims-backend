@@ -60,6 +60,12 @@ import {
   PopulationGrowth20002010,
   PopulationGrowth20002010Schema
 } from './entities/layers/layer-population-growth-20002010.schema'
+import {
+  LayerMetroStation,
+  LayerMetroStationSchema
+} from './entities/layers/layer-metro-station.schema'
+import { LayerBlueStrip, LayerBlueStripSchema } from './entities/layers/layer-blue-strip.schema'
+import { LayerMetroLine, LayerMetroLineSchema } from './entities/layers/layer-metro-line.schema'
 
 @Module({
   imports: [
@@ -69,6 +75,9 @@ import {
     ]),
     MongooseModule.forFeature([{ name: LayerNonBuiltArea.name, schema: LayerNonBuiltAreaSchema }]),
     MongooseModule.forFeature([{ name: LayerSoilUsage.name, schema: LayerSoilUsageSchema }]),
+    MongooseModule.forFeature([{ name: LayerMetroStation.name, schema: LayerMetroStationSchema }]),
+    MongooseModule.forFeature([{ name: LayerBlueStrip.name, schema: LayerBlueStripSchema }]),
+    MongooseModule.forFeature([{ name: LayerMetroLine.name, schema: LayerMetroLineSchema }]),
     MongooseModule.forFeature([{ name: LayerTree.name, schema: LayerTreeSchema }]),
     MongooseModule.forFeature([
       { name: LayerPopulation2010.name, schema: LayerPopulation2010Schema }

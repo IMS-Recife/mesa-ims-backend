@@ -14,5 +14,8 @@ export enum Layer {
   AVERAGEINCOME2010 = 'AverageIncome2010',
   NUMBERHOUSEHOLDS2010 = 'NumberHouseholds2010',
   DEMOGRAPHICDENSITY2010 = 'DemographicDensity2010',
-  POPULATIONGROWTH20002010 = 'PopulationGrowth20002010'
+  POPULATIONGROWTH20002010 = 'PopulationGrowth20002010',
+  METROSTATION = 'MetroStation',
+  BLUESTRIP = 'BlueStrip',
+  METROLINE = 'MetroLine'
 }
