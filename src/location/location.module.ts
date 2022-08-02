@@ -66,6 +66,18 @@ import {
 } from './entities/layers/layer-metro-station.schema'
 import { LayerBlueStrip, LayerBlueStripSchema } from './entities/layers/layer-blue-strip.schema'
 import { LayerMetroLine, LayerMetroLineSchema } from './entities/layers/layer-metro-line.schema'
+import {
+  LayerTotalRecifeLine,
+  LayerTotalRecifeLineSchema
+} from './entities/layers/layer-total-recife-line.schema'
+import {
+  LayerCycleLaneMesh2022,
+  LayerCycleLaneMesh2022Schema
+} from './entities/layers/layer-cycle-lane-mesh-2022.schema'
+import {
+  LayerPedestrianMobilityTacticalUrbanism,
+  LayerPedestrianMobilityTacticalUrbanismSchema
+} from './entities/layers/layer-pedestrian-mobility-tactical-urbanism.schema'
 
 @Module({
   imports: [
@@ -78,6 +90,18 @@ import { LayerMetroLine, LayerMetroLineSchema } from './entities/layers/layer-me
     MongooseModule.forFeature([{ name: LayerMetroStation.name, schema: LayerMetroStationSchema }]),
     MongooseModule.forFeature([{ name: LayerBlueStrip.name, schema: LayerBlueStripSchema }]),
     MongooseModule.forFeature([{ name: LayerMetroLine.name, schema: LayerMetroLineSchema }]),
+    MongooseModule.forFeature([
+      {
+        name: LayerPedestrianMobilityTacticalUrbanism.name,
+        schema: LayerPedestrianMobilityTacticalUrbanismSchema
+      }
+    ]),
+    MongooseModule.forFeature([
+      { name: LayerCycleLaneMesh2022.name, schema: LayerCycleLaneMesh2022Schema }
+    ]),
+    MongooseModule.forFeature([
+      { name: LayerTotalRecifeLine.name, schema: LayerTotalRecifeLineSchema }
+    ]),
     MongooseModule.forFeature([{ name: LayerTree.name, schema: LayerTreeSchema }]),
     MongooseModule.forFeature([
       { name: LayerPopulation2010.name, schema: LayerPopulation2010Schema }

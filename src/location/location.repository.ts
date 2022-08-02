@@ -61,6 +61,18 @@ import {
 } from './entities/layers/layer-metro-station.schema'
 import { LayerBlueStrip, LayerBlueStripDocument } from './entities/layers/layer-blue-strip.schema'
 import { LayerMetroLine, LayerMetroLineDocument } from './entities/layers/layer-metro-line.schema'
+import {
+  LayerTotalRecifeLine,
+  LayerTotalRecifeLineDocument
+} from './entities/layers/layer-total-recife-line.schema'
+import {
+  LayerCycleLaneMesh2022,
+  LayerCycleLaneMesh2022Document
+} from './entities/layers/layer-cycle-lane-mesh-2022.schema'
+import {
+  LayerPedestrianMobilityTacticalUrbanism,
+  LayerPedestrianMobilityTacticalUrbanismDocument
+} from './entities/layers/layer-pedestrian-mobility-tactical-urbanism.schema'
 
 const DEFAULT_CHUNK_SIZE = 10000
 
@@ -91,8 +103,17 @@ export class LocationRepository {
     @InjectModel(LayerMetroLine.name)
     private metroLineModel: Model<LayerMetroLineDocument>,
 
+    @InjectModel(LayerTotalRecifeLine.name)
+    private totalRecifeLineModel: Model<LayerTotalRecifeLineDocument>,
+
     @InjectModel(LayerBlueStrip.name)
     private blueStripModel: Model<LayerBlueStripDocument>,
+
+    @InjectModel(LayerCycleLaneMesh2022.name)
+    private cycleLaneMesh2022Model: Model<LayerCycleLaneMesh2022Document>,
+
+    @InjectModel(LayerPedestrianMobilityTacticalUrbanism.name)
+    private pedestrianMobilityTacticalUrbanismModel: Model<LayerPedestrianMobilityTacticalUrbanismDocument>,
 
     @InjectModel(LayerUrbanLicensing.name)
     private urbanLicensingModel: Model<LayerUrbanLicensingDocument>,
@@ -126,6 +147,8 @@ export class LocationRepository {
       [Layer.METROSTATION]: this.metroStationModel,
       [Layer.BLUESTRIP]: this.blueStripModel,
       [Layer.METROLINE]: this.metroLineModel,
+      [Layer.CYCLELANEMESH2022]: this.cycleLaneMesh2022Model,
+      [Layer.PEDESTRIANMOBILITYTACTICALURBANISM]: this.pedestrianMobilityTacticalUrbanismModel,
       [Layer.TREE]: this.treeModel,
       [Layer.URBAN_LICENSING]: this.urbanLicensingModel,
       [Layer.POPULATION2010]: this.populationModel,
@@ -186,6 +209,17 @@ export class LocationRepository {
   }
   async getMetroLine(queryObj: any): Promise<LayerMetroLineDocument[]> {
     return this.metroLineModel.find(queryObj)
+  }
+  async getTotalRecifeLine(queryObj: any): Promise<LayerTotalRecifeLineDocument[]> {
+    return this.totalRecifeLineModel.find(queryObj)
+  }
+  async getCycleLaneMesh2022(queryObj: any): Promise<LayerCycleLaneMesh2022Document[]> {
+    return this.cycleLaneMesh2022Model.find(queryObj)
+  }
+  async getPedestrianMobilityTacticalUrbanism(
+    queryObj: any
+  ): Promise<LayerPedestrianMobilityTacticalUrbanismDocument[]> {
+    return this.pedestrianMobilityTacticalUrbanismModel.find(queryObj)
   }
   async getPopulation(queryObj: any): Promise<LayerPopulation2010Document[]> {
     return this.populationModel.find(queryObj)

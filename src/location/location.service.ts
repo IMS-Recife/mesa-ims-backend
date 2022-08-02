@@ -20,6 +20,8 @@ export class LocationService {
     [Layer.METROSTATION]: this.getMetroStation,
     [Layer.METROLINE]: this.getMetroLine,
     [Layer.BLUESTRIP]: this.getBlueStrip,
+    [Layer.TOTALRECIFELINE]: this.getTotalRecifeLine,
+    [Layer.CYCLELANEMESH2022]: this.getCycleLaneMesh2022,
     [Layer.TREE]: this.getTree,
     [Layer.URBAN_LICENSING]: this.getUrbanLicensing,
     [Layer.POPULATION2010]: this.getPopulation,
@@ -33,7 +35,8 @@ export class LocationService {
     [Layer.AVERAGEINCOME2010]: this.getAverageIncome2010,
     [Layer.NUMBERHOUSEHOLDS2010]: this.getNumberHouseholds2010,
     [Layer.DEMOGRAPHICDENSITY2010]: this.getDemographicDensity2010,
-    [Layer.POPULATIONGROWTH20002010]: this.getPopulationGrowth20002010
+    [Layer.POPULATIONGROWTH20002010]: this.getPopulationGrowth20002010,
+    [Layer.PEDESTRIANMOBILITYTACTICALURBANISM]: this.getPedestrianMobilityTacticalUrbanism
   }
 
   constructor(private readonly locationRepository: LocationRepository) {}
@@ -129,6 +132,18 @@ export class LocationService {
   private async getMetroLine(searchArea: CoordinatesSearchDto) {
     const queryObj = this.buildQuery(searchArea)
     return this.locationRepository.getMetroLine(queryObj)
+  }
+  private async getTotalRecifeLine(searchArea: CoordinatesSearchDto) {
+    const queryObj = this.buildQuery(searchArea)
+    return this.locationRepository.getTotalRecifeLine(queryObj)
+  }
+  private async getCycleLaneMesh2022(searchArea: CoordinatesSearchDto) {
+    const queryObj = this.buildQuery(searchArea)
+    return this.locationRepository.getCycleLaneMesh2022(queryObj)
+  }
+  private async getPedestrianMobilityTacticalUrbanism(searchArea: CoordinatesSearchDto) {
+    const queryObj = this.buildQuery(searchArea)
+    return this.locationRepository.getPedestrianMobilityTacticalUrbanism(queryObj)
   }
 
   private async getTree(searchArea: CoordinatesSearchDto) {

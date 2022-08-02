@@ -17,5 +17,8 @@ export enum Layer {
   POPULATIONGROWTH20002010 = 'PopulationGrowth20002010',
   METROSTATION = 'MetroStation',
   BLUESTRIP = 'BlueStrip',
-  METROLINE = 'MetroLine'
+  METROLINE = 'MetroLine',
+  TOTALRECIFELINE = 'TotalRecifeLine',
+  CYCLELANEMESH2022 = 'CycleLaneMesh2022',
+  PEDESTRIANMOBILITYTACTICALURBANISM = 'PedestrianMobilityTacticalUrbanism'
 }
