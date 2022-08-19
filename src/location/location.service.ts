@@ -22,6 +22,7 @@ export class LocationService {
     [Layer.BLUESTRIP]: this.getBlueStrip,
     [Layer.TOTALRECIFELINE]: this.getTotalRecifeLine,
     [Layer.CYCLELANEMESH2022]: this.getCycleLaneMesh2022,
+    [Layer.ZONING]: this.getZoning,
     [Layer.TREE]: this.getTree,
     [Layer.URBAN_LICENSING]: this.getUrbanLicensing,
     [Layer.POPULATION2010]: this.getPopulation,
@@ -88,6 +89,11 @@ export class LocationService {
     const queryObj = this.buildQuery(searchArea)
 
     return this.locationRepository.getBuiltAreas(queryObj)
+  }
+  private async getZoning(searchArea: CoordinatesSearchDto) {
+    const queryObj = this.buildQuery(searchArea)
+
+    return this.locationRepository.getZoning(queryObj)
   }
 
   private async getEnvLicensing(searchArea: CoordinatesSearchDto) {

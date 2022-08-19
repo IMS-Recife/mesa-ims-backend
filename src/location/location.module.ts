@@ -78,6 +78,7 @@ import {
   LayerPedestrianMobilityTacticalUrbanism,
   LayerPedestrianMobilityTacticalUrbanismSchema
 } from './entities/layers/layer-pedestrian-mobility-tactical-urbanism.schema'
+import { LayerZoning, LayerZoningSchema } from './entities/layers/layer-zoning.schema'
 
 @Module({
   imports: [
@@ -90,6 +91,7 @@ import {
     MongooseModule.forFeature([{ name: LayerMetroStation.name, schema: LayerMetroStationSchema }]),
     MongooseModule.forFeature([{ name: LayerBlueStrip.name, schema: LayerBlueStripSchema }]),
     MongooseModule.forFeature([{ name: LayerMetroLine.name, schema: LayerMetroLineSchema }]),
+    MongooseModule.forFeature([{ name: LayerZoning.name, schema: LayerZoningSchema }]),
     MongooseModule.forFeature([
       {
         name: LayerPedestrianMobilityTacticalUrbanism.name,

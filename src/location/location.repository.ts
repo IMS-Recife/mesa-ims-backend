@@ -73,6 +73,11 @@ import {
   LayerPedestrianMobilityTacticalUrbanism,
   LayerPedestrianMobilityTacticalUrbanismDocument
 } from './entities/layers/layer-pedestrian-mobility-tactical-urbanism.schema'
+import {
+  LayerZoning,
+  LayerZoningDocument,
+  LayerZoningSchema
+} from './entities/layers/layer-zoning.schema'
 
 const DEFAULT_CHUNK_SIZE = 10000
 
@@ -90,6 +95,9 @@ export class LocationRepository {
 
     @InjectModel(LayerNonBuiltArea.name)
     private nonBuiltAreaModel: Model<LayerNonBuiltAreaDocument>,
+
+    @InjectModel(LayerZoning.name)
+    private zoningModel: Model<LayerZoningDocument>,
 
     @InjectModel(LayerTree.name)
     private treeModel: Model<LayerTreeDocument>,
@@ -149,6 +157,7 @@ export class LocationRepository {
       [Layer.METROLINE]: this.metroLineModel,
       [Layer.CYCLELANEMESH2022]: this.cycleLaneMesh2022Model,
       [Layer.PEDESTRIANMOBILITYTACTICALURBANISM]: this.pedestrianMobilityTacticalUrbanismModel,
+      [Layer.ZONING]: this.zoningModel,
       [Layer.TREE]: this.treeModel,
       [Layer.URBAN_LICENSING]: this.urbanLicensingModel,
       [Layer.POPULATION2010]: this.populationModel,
@@ -188,8 +197,10 @@ export class LocationRepository {
   }
 
   async getTree(queryObj: any): Promise<LayerTreeDocument[]> {
-    console.log(queryObj)
     return this.treeModel.find(queryObj).select(DEFAULT_LOCATION_FIELDS)
+  }
+  async getZoning(queryObj: any): Promise<LayerZoningDocument[]> {
+    return this.zoningModel.find(queryObj).select(DEFAULT_LOCATION_FIELDS)
   }
 
   async getUrbanLicensing(queryObj: any): Promise<LayerUrbanLicensingDocument[]> {

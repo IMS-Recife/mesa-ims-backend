@@ -20,5 +20,6 @@ export enum Layer {
   METROLINE = 'MetroLine',
   TOTALRECIFELINE = 'TotalRecifeLine',
   CYCLELANEMESH2022 = 'CycleLaneMesh2022',
-  PEDESTRIANMOBILITYTACTICALURBANISM = 'PedestrianMobilityTacticalUrbanism'
+  PEDESTRIANMOBILITYTACTICALURBANISM = 'PedestrianMobilityTacticalUrbanism',
+  ZONING = 'Zoning'
 }
