@@ -98,7 +98,7 @@ O deploy é feito via Github Actions, pelos arquivos na pasta `.github/workflows
 
 Dentro da pasta `shapefileConverter` há um sub projeto com scripts que convertem arquivos shapefiles em arquivos GeoJSONs e também convertem um tipo de coordenada geográfica em outro (por exemplo, de EPSG:31985 para 4326). Isso foi usado no início do projeto para converter as áreas do Parque Capibaribe e não influencia no resto do código da API, mas está incluso no repositório caso novas conversões sejam necessárias.
 
-## Como adicionar chamadas
+## Como adicionar uma nova camada
 
 Para adicionar uma nova camada no backend-end, deve-se seguir os seguintes passos:
 
